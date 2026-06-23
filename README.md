@@ -1,5 +1,9 @@
 # 📶🛜📡📡📶🛜 WiPulse
 
+<p align="center">
+  <img src="assets/hero-dashboard.png" alt="WiPulse Dashboard">
+</p>
+
 **Real-time contactless respiration monitoring using Wi-Fi Channel State Information (CSI), OpenWrt routers, Python signal processing, and a modern Apple-inspired dashboard.**
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
