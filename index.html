@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitor Biométrico Avanzado CSI</title>
+    <title>Advanced Biometric CSI Monitor</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
@@ -14,7 +14,7 @@
             --text-muted: #86868b;
             --accent-fuchsia: #ff2a7a;
             --border-color: #e5e5ea;
-            --pulse-speed: 0.8s; /* Se controlará dinámicamente con JS */
+            --pulse-speed: 0.8s; /* Controlled dynamically with JS */
             --breathe-speed: 4s;
         }
 
@@ -42,7 +42,7 @@
             transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Banner de Emergencia con Animación de Parpadeo Suave */
+        /* Emergency Banner with Smooth Pulse Animation */
         #emergencyBanner {
             display: none;
             background-color: var(--accent-fuchsia);
@@ -63,7 +63,7 @@
             100% { transform: scale(1); opacity: 0.95; }
         }
 
-        /* Contenedor de Notificaciones Toast (Estilo iOS) */
+        /* Toast Notifications Container (iOS Style) */
         #toastContainer {
             position: fixed;
             top: 30px;
@@ -102,7 +102,7 @@
         .header-panel h2 { margin: 0 0 6px 0; font-size: 1.8em; font-weight: 600; letter-spacing: -0.5px; }
         .header-panel p { margin: 0; color: var(--text-muted); font-size: 0.95em; }
 
-        /* Icono de Estado Wi-Fi */
+        /* Wi-Fi Status Icon */
         .wifi-status {
             display: flex;
             align-items: center;
@@ -146,7 +146,7 @@
         .metric-card h3 { margin: 0; color: var(--text-muted); font-size: 0.85em; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
         .metric-value { font-size: 2.8em; font-weight: 700; margin: 8px 0; letter-spacing: -1px; display: flex; align-items: center; justify-content: center; gap: 8px; }
 
-        /* ANIMACIÓN 1: Corazón palpitante dinámico */
+        /* ANIMATION 1: Dynamic beating heart */
         .heart-icon {
             color: var(--accent-fuchsia);
             display: inline-block;
@@ -160,7 +160,7 @@
             70% { transform: scale(1); }
         }
 
-        /* ANIMACIÓN 2: Efecto ola de respiración de fondo */
+        /* ANIMATION 2: Background breathing glow effect */
         .breathe-glow::before {
             content: '';
             position: absolute;
@@ -194,7 +194,7 @@
         button.primary { background-color: var(--accent-fuchsia); }
         button:hover { transform: scale(1.03); box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
 
-        /* Historial */
+        /* History Section */
         .history-section { border-top: 1px solid var(--border-color); padding-top: 30px; }
         .history-section h3 { margin-top: 0; font-weight: 600; }
         
@@ -212,40 +212,40 @@
     <div id="toastContainer"></div>
 
     <div id="dashboard">
-        <div id="emergencyBanner">⚠️ ALERTA CRÍTICA: SE DETECTÓ UNA CAÍDA EN EL ÁREA DE COBERTURA</div>
+        <div id="emergencyBanner">⚠️ CRITICAL ALERT: FALL DETECTED IN THE COVERAGE AREA</div>
 
         <div class="header-panel">
             <div>
                 <div class="wifi-status">
-                    <span>● CSI RF-Sensing Node Activo</span>
-                    <span style="color:#4ecca3"> 📶 Excelente</span>
+                    <span>● CSI RF-Sensing Node Active</span>
+                    <span style="color:#4ecca3"> 📶 Excellent</span>
                 </div>
-                <h2>Análisis Espacial y Biométrico</h2>
-                <p>Procesamiento de ondas RF mediante Redes Neuronales</p>
+                <h2>Spatial & Biometric Analysis</h2>
+                <p>RF Wave Processing via Neural Networks</p>
             </div>
-            <div id="estadoTexto" class="status-indicator estado-relajado">Calibrando...</div>
+            <div id="estadoTexto" class="status-indicator estado-relajado">Calibrating...</div>
         </div>
 
         <div class="metrics-grid">
             <div class="metric-card">
-                <h3>Frecuencia Cardíaca</h3>
+                <h3>Heart Rate</h3>
                 <div class="metric-value">
                     <span id="bpmData">--</span><span class="heart-icon">♥</span>
                 </div>
                 <p style="margin:0; color:var(--text-muted); font-size:0.8em;">BPM</p>
             </div>
             <div class="metric-card breathe-glow">
-                <h3>Respiración</h3>
+                <h3>Respiration</h3>
                 <div id="rpmData" class="metric-value">--</div>
                 <p style="margin:0; color:var(--text-muted); font-size:0.8em;">RPM</p>
             </div>
             <div class="metric-card">
-                <h3>Ocupación Sala</h3>
+                <h3>Room Occupancy</h3>
                 <div id="userData" class="metric-value">--</div>
-                <p style="margin:0; color:var(--text-muted); font-size:0.8em;">Personas</p>
+                <p style="margin:0; color:var(--text-muted); font-size:0.8em;">People</p>
             </div>
             <div class="metric-card">
-                <h3>Seguridad Física</h3>
+                <h3>Physical Security</h3>
                 <div id="alertaData" class="metric-value" style="font-size: 1.6em; line-height: 2.3em; font-weight: 600;">--</div>
             </div>
         </div>
@@ -255,22 +255,22 @@
         </div>
 
         <div class="controls">
-            <button class="primary" onclick="guardarMedicionActual()">Registrar Estado</button>
-            <button onclick="exportarPDF()">Exportar Reporte</button>
-            <button id="toggleBtn" onclick="toggleMedicion()">Pausar</button>
+            <button class="primary" onclick="guardarMedicionActual()">Record Status</button>
+            <button onclick="exportarPDF()">Export Report</button>
+            <button id="toggleBtn" onclick="toggleMedicion()">Pause</button>
         </div>
 
         <div class="history-section">
-            <h3>Historial de Seguridad y Salud</h3>
+            <h3>Security & Health History</h3>
             <table class="history-table">
                 <thead>
                     <tr>
-                        <th>Fecha y Hora</th>
-                        <th>Pulso (BPM)</th>
+                        <th>Date & Time</th>
+                        <th>Pulse (BPM)</th>
                         <th>Resp. (RPM)</th>
-                        <th>Personas</th>
-                        <th>Estado Anímico</th>
-                        <th>Incidente</th>
+                        <th>People</th>
+                        <th>Mood Status</th>
+                        <th>Incident</th>
                     </tr>
                 </thead>
                 <tbody id="historyBody"></tbody>
@@ -301,7 +301,7 @@
         let ultimoDato = null;
         let personasAnteriores = null;
 
-        // Función para lanzar notificaciones estilo iOS (Toasts)
+        // Function to trigger iOS-style notifications (Toasts)
         function showToast(mensaje) {
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
@@ -327,25 +327,30 @@
                 document.getElementById('rpmData').innerText = Math.round(data.rpm);
                 document.getElementById('userData').innerText = data.usuarios;
                 
-                // CONTROL DE ANIMACIÓN DINÁMICA: Ajusta la velocidad del corazón según los BPM reales
+                // DYNAMIC ANIMATION CONTROL: Adjusts heart rate speed matching real BPM
                 const calculoVelocidad = (60 / data.bpm) + 's';
                 document.documentElement.style.setProperty('--pulse-speed', calculoVelocidad);
 
-                // Ajusta la velocidad de la tarjeta respiratoria
+                // Adjusts respiration card breathing effect speed
                 const calculoBreathe = (60 / data.rpm) + 's';
                 document.documentElement.style.setProperty('--breathe-speed', calculoBreathe);
 
-                // Lanzar toast inteligente si cambia el conteo de personas en tiempo real
+                // Smart toast logic if occupancy count changes in real time
                 if (personasAnteriores !== null && personasAnteriores !== data.usuarios) {
-                    const cambio = data.usuarios > personasAnteriores ? "Usuario ingresó a la sala" : "Usuario salió de la sala";
-                    showToast(`📊 Entorno: ${cambio}`);
+                    const cambio = data.usuarios > personasAnteriores ? "User entered the room" : "User left the room";
+                    showToast(`📊 Environment: ${cambio}`);
                 }
                 personasAnteriores = data.usuarios;
 
                 const alertaElement = document.getElementById('alertaData');
                 const banner = document.getElementById('emergencyBanner');
                 const dashboard = document.getElementById('dashboard');
-                alertaElement.innerText = data.alerta;
+
+                // UI Localization mapping for backend strings
+                let txtAlerta = data.alerta;
+                if (data.alerta === "¡Caída Detectada!") txtAlerta = "Fall Detected!";
+                if (data.alerta === "Estable") txtAlerta = "Stable";
+                alertaElement.innerText = txtAlerta;
 
                 if (data.alerta === "¡Caída Detectada!") {
                     alertaElement.className = "metric-value danger-text";
@@ -358,7 +363,11 @@
                 }
 
                 const estadoElement = document.getElementById('estadoTexto');
-                estadoElement.innerText = data.estado;
+                let txtEstado = data.estado;
+                if (data.estado === "Relajado") txtEstado = "Relaxed";
+                if (data.estado === "Ansioso") txtEstado = "Anxious";
+                
+                estadoElement.innerText = txtEstado;
                 estadoElement.className = data.estado === "Relajado" ? "status-indicator estado-relajado" : "status-indicator estado-ansioso";
 
                 if (vitalsChart.data.labels.length > 12) {
@@ -381,13 +390,22 @@
                 tbody.innerHTML = "";
                 
                 historial.reverse().forEach(reg => {
+                    // UI Localization mapping for table row data
+                    let txtEstado = reg.estado;
+                    if (reg.estado === "Relajado") txtEstado = "Relaxed";
+                    if (reg.estado === "Ansioso") txtEstado = "Anxious";
+
+                    let txtAlerta = reg.alerta;
+                    if (reg.alerta === "¡Caída Detectada!") txtAlerta = "Fall Detected!";
+                    if (reg.alerta === "Estable") txtAlerta = "Stable";
+
                     const row = `<tr>
                         <td>${reg.timestamp}</td>
                         <td>${Math.round(reg.bpm)}</td>
                         <td>${Math.round(reg.rpm)}</td>
                         <td>${reg.usuarios}</td>
-                        <td style="color: ${reg.estado === 'Ansioso' ? '#ff2a7a' : '#86868b'}; font-weight:500;">${reg.estado}</td>
-                        <td class="${reg.alerta !== 'Estable' ? 'danger-text' : ''}">${reg.alerta}</td>
+                        <td style="color: ${reg.estado === 'Ansioso' ? '#ff2a7a' : '#86868b'}; font-weight:500;">${txtEstado}</td>
+                        <td class="${reg.alerta !== 'Estable' ? 'danger-text' : ''}">${txtAlerta}</td>
                     </tr>`;
                     tbody.innerHTML += row;
                 });
@@ -402,23 +420,23 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(ultimoDato)
                 });
-                showToast("✓ Registro guardado en historial.json");
+                showToast("✓ Record saved in historial.json");
                 cargarHistorial();
             } catch (e) { console.error(e); }
         }
 
         function toggleMedicion() {
             medicionActiva = !medicionActiva;
-            document.getElementById('toggleBtn').innerText = medicionActiva ? "Pausar" : "Reanudar";
-            showToast(medicionActiva ? "▶ Medición reanudada" : "⏸ Sistema en pausa");
+            document.getElementById('toggleBtn').innerText = medicionActiva ? "Pause" : "Resume";
+            showToast(medicionActiva ? "▶ Measurement resumed" : "⏸ System paused");
         }
 
         function exportarPDF() {
             const elemento = document.getElementById('dashboard');
-            showToast("📥 Generando reporte PDF...");
+            showToast("📥 Generating PDF report...");
             html2pdf().set({ 
                 margin: 10, 
-                filename: 'Reporte_CSI_Premium.pdf', 
+                filename: 'CSI_Premium_Report.pdf', 
                 html2canvas: { scale: 2, backgroundColor: '#f5f5f7' }, 
                 jsPDF: { orientation: 'landscape' } 
             }).from(elemento).save();
@@ -426,7 +444,7 @@
 
         window.onload = () => {
             cargarHistorial();
-            showToast("⚡ Sistema CSI Inicializado");
+            showToast("⚡ CSI System Initialized");
             setInterval(obtenerDatos, 2000);
         };
     </script>
